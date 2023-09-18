@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- подключаем по ссылкам бесплатные стили -->
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" rel="stylesheet">
+    <script crossorigin="anonymous"
+            integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3"
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
+    <title>Главная</title>
+</head>
+<body>
+<!-- шапка страницы, содержащая поисковую строку и ссылку на главную страницу-->
+<header class="p-3 bg-dark text-white">
+    <div class="container" style="display: flex; flex-direction: row">
+        <!-- ссылка на главную страницу -->
+        <a href="/" class="nav-link text-white" style="    margin: auto;  font-size: 20px;    font-weight: 700;">
+            Главная</a>
+        <!-- поисковая строка -->
+        <div class="m-auto d-flex align-items-center" style="min-width: 600px; width: auto">
+            <!-- поле поисковой строки для ввода текста  -->
+            <input class="form-control" id="exampleDataList" list="datalistOptions" placeholder="Поиск...">
+            <!-- список с вариантами, которые могут быть указаны в текстовом поле, и будут показываться как подсказка -->
+            <datalist id="datalistOptions">
+                <option data-value="1">Прямоугольник</option>
+                <option data-value="2">Квадрат</option>
+                <option data-value="3">Ромб</option>
+                <option data-value="4">Треугольник</option>
+                <option data-value="5">Трапеция</option>
+                <option data-value="6">Многоугольник</option>
+                <option data-value="7">Паралелограмм</option>
+                <option data-value="8">Oкpужнocть</option>
+            </datalist>
+        </div>
+    </div>
+    <!-- код выполняемый при загрузке страницы -->
+    <script lang="JavaScript">
+        // получаем все эелементы типа вариант (option) и формируем список возможных значений в поискового поля
+        const list =  Array.from(document.getElementsByTagName('option'))
+        // для поискового поля на событие 'изменение значения' ('change') задаем обработчик события
+        document.getElementById('exampleDataList').addEventListener('change', (event) =>
+          {
+            // ищем в списке возможных вариантов тот, у которого текст совпадает с текущим значением из события
+            const element = list.find(i=>i.value === event.target.value)
+            // если такой элемент есть, то перенаправляем пользователя на страничку выбранного им материала
+            if(element)
+                window.location.href = '/figures/'+element.getAttribute('data-value')
+          });
+    </script>
+</header>
+<!-- основная зона страницы -->
+<main class="px-3" style="padding-top:1rem">
+    <h1>Геометрический справочник </h1>
+    <p class="lead">Справочная информация о геометрических фигурах разница от источника к
+        источнику из-за формулировок, что в свою очередь может запутать ученика. Данный онлайн-справочник призван решить
+        данную проблему, предоставляя централизованную информацию по материалам школьной программы.
+    </p>
+
+</main>
+
+</body>
+</html>
