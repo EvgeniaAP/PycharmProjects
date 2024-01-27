@@ -24,15 +24,9 @@
             <input class="form-control" id="exampleDataList" list="datalistOptions" placeholder="Поиск...">
             <!-- список с вариантами, которые могут быть указаны в текстовом поле, и будут показываться как подсказка -->
             <datalist id="datalistOptions">
-                <option data-value="1">Прямоугольник</option>
-                <option data-value="2">Квадрат</option>
-                <option data-value="3">Ромб</option>
-                <option data-value="4">Треугольник</option>
-                <option data-value="5">Трапеция</option>
-                <option data-value="6">Многоугольник</option>
-                <option data-value="7">Паралелограмм</option>
-                <option data-value="8">Oкpужнocть</option>
-                <option data-value="9">Куб</option>
+                {% for fig in figures %}
+                <option data-value="{{fig.id}}">{{fig.name}}</option>
+                {% endfor %}
             </datalist>
         </div>
     </div>

@@ -11,14 +11,15 @@
     <link rel="icon" href="/docs/5.0/assets/img/favicons/favicon.ico">
     <!-- из переменной переданной в шаблон достаем название материала -->
     <title>{{figure.name}}</title>
-<script type="importmap">
+    <script type="importmap">
   {
     "imports": {
       "three": "https://unpkg.com/three@0.160.1/build/three.module.js",
       "three/addons/": "https://unpkg.com/three@0.160.1/examples/jsm/"
     }
   }
-</script>
+
+    </script>
 </head>
 <body>
 <!-- шапка страницы, содержащая поисковую строку и ссылку на главную страницу-->
@@ -33,15 +34,9 @@
             <input class="form-control" id="exampleDataList" list="datalistOptions" placeholder="Поиск...">
             <!-- список с вариантами, которые могут быть указаны в текстовом поле, и будут показываться как подсказка -->
             <datalist id="datalistOptions">
-                <option data-value="1">Прямоугольник</option>
-                <option data-value="2">Квадрат</option>
-                <option data-value="3">Ромб</option>
-                <option data-value="4">Треугольник</option>
-                <option data-value="5">Трапеция</option>
-                <option data-value="6">Многоугольник</option>
-                <option data-value="7">Паралелограмм</option>
-                <option data-value="8">Oкpужнocть</option>
-                <option data-value="9">Куб</option>
+                {% for fig in figures %}
+                <option data-value="{{fig.id}}">{{fig.name}}</option>
+                {% endfor %}
             </datalist>
         </div>
     </div>
@@ -64,6 +59,7 @@
             if(element)
                 window.location.href = '/figures/'+element.getAttribute('data-value')
           });
+
     </script>
 </header>
 <!-- основная зона страницы -->
@@ -74,43 +70,24 @@
         <img class=" border rounded-3" style="margin-right:1rem; width: 400px; height: 400px"
              src="/static/{{figure.id}}.png"/>
         {% else %}
-        <canvas id="fig"></canvas>
-<script type="module" src="/static/camera-control.js">
+        <canvas id="fig" style="aspect-ratio: 1; width: 290px; margin: 5px;" width="500" height="500"></canvas>
+        <!--<script type="module" src="/static/camera-control.js">-->
 
-</script>
-            <script type="module">
-            			import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-            			import { CameraControl } from '/static/camera-control.js';
+        <!--</script>-->
+        <script type="module" src="/static/scripts/draw.js">
 
-            import * as THREE from 'three';
-
-            const scene = new THREE.Scene();
-
-            const fov = 75;
-const aspect = 2;  // the canvas default
-const near = 0.1;
-const far = 5;
-const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-camera.position.z = 2;
-            	const renderer = new THREE.WebGLRenderer( { antialias: true, canvas: document.getElementById('fig') } );
-
-    const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
-const cube = new THREE.Mesh( geometry, material );
-scene.add( cube );
-
-			//const orbit = new OrbitControls( camera, renderer.domElement );
-			//orbit.enableZoom = false;
+        </script>
+        <script type="module">
+            import { Drawer } from '/static/scripts/draw.js';
+            const drawer = new Drawer(document.getElementById('fig'))
+            drawer.addGeometry('{{ figure.model}}')
+            drawer.addLight()
+drawer.draw()
+drawer.addControls()
+requestAnimationFrame( ()=>drawer.animate() )
 
 
-
-new CameraControl(renderer, camera, () => {
-    // you might want to rerender on camera update if you are not rerendering all the time
-    window.requestAnimationFrame(() => renderer.render(scene, camera))
-})
-
-renderer.render(scene, camera);
-    </script>
+        </script>
         {% endif %}
         <div class="bg-light border rounded-3" style="flex:3; height: 100%; padding:1rem; overflow: auto;">
             <!-- из переменной переданной в шаблон достаем название материала -->
