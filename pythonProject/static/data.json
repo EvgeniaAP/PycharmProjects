@@ -92,6 +92,13 @@
         "Через три точки, не лежащие на одной прямой, можно провести окружность, и притом только одну.",
         "S=πR²"
       ]
+    },
+    {
+      "id": 9,
+      "name": "Куб",
+      "model": "<div class=\"sketchfab-embed-wrapper\"> <iframe title=\"Cube\" frameborder=\"0\" allowfullscreen mozallowfullscreen=\"true\" webkitallowfullscreen=\"true\" allow=\"autoplay; fullscreen; xr-spatial-tracking\" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share width=\"640\" height=\"480\" src=\"https://sketchfab.com/models/48b8725fd63a4562abc181cf09b1333a/embed?autostart=1&camera=0\"> </iframe> </div>",
+      "about": "",
+      "features": []
     }
   ]
 }
